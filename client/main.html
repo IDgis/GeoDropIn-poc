@@ -1,25 +1,53 @@
 <head>
-  <title>commandline</title>
+  <title>GeoDropIn</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Welcome to GeoDropIn!</h1>
 
-  {{> hello}}
-  {{> info}}
+  <h2>Try-out execute OS command</h2>
+  {{> cmd}}
+  
+  <h2>Try-out extract zip file</h2>
+  <h3>https://github.com/EvanOxfeld/node-unzip</h3>
+  {{> ziptest}}
+  
+  <h2>Try-out translate gis file to Postgres table using ogr2ogr</h2>
+  <h3>https://github.com/wavded/ogr2ogr </h3>
+  {{> ogrpgtest}}
+  
+  <h2>Try-out update metadata tabel in Oracle using collections</h2>
+  <h3>https://atmospherejs.com/metstrike/meteor-oracle </h3>
+  {{> oracletest}}
+  
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="cmd">
+  <input id="command" name="command">
+  <button>Execute</button>
+  <p>The result of the command </p>
+  <p><em>{{commandInput}}</em> </p>
+  <p>is:</p>
+  <p><em>{{commandOutput}}</em> </p>
 </template>
 
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
-  </ul>
+<template name="ziptest">
+  Zipfile : <input id="zipPath" name="zipPath" >
+  Extract to: <input id="outputPath" name="outputPath" >
+  <button>Unzip</button>
 </template>
+
+<template name="ogrpgtest">
+  GIS file : <input id="gisPath" name="gisPath">
+  Postgres connectie: <input id="pgconnPath" name="pgconnPath">
+  <button>Translate Gis file to Postgres tabel</button>
+</template>
+
+<template name="oracletest">
+  PHYSICALNAME : <input id="physicalName" name="physicalName">
+  Oracle connectie: <input id="oraconnPath" name="oraconnPath">
+  <button>Insert to metadata tabel in oracle</button>
+</template>
+
+
+
