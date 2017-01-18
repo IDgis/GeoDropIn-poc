@@ -104,21 +104,21 @@ PLSQL opstarten met
 ``"C:\Programs\PLSQL Developer\plsqldev" TNS_ADMIN=C:\Programs\instantclient_11_2\network\admin``
 Kies uit lijst databases "ORACLE-XEC"
 
+## Packages te installeren om dit project te draaien
+### Packages
+Installeer de volgende packages    
+``meteor npm install --save babel-runtime``    
+``meteor npm install --save ogr2ogr``    
+``meteor npm install --save unzip``     
 
-## Wat is nodig voor de ogr2ogr en oracle testen
-**test ogr2db**
-``meteor npm install --save ogr2ogr``
+``meteor --port=3010``
 
-*gisPath*: C:\Users\Rob\Documents\Gis\data\shp_sampledata\duurzaam_ondernemen_ijsselstein.shp
-*dbDriver*: PostgreSQL
-*dbConn*: PG:dbname=gdaltest host=192.168.99.100 port=6544 user=postgres password=postgres
-
-**test oracle**
+### test oracle collections
 ``meteor add metstrike:meteor-oracle``
 
 !! *werkt alleen nog onder linux* !! 
 
-test met oracle driver en knex
-npm install knex --save - http://knexjs.org/
-npm install oracledb --save - https://github.com/oracle/node-oracledb
-npm install strong-oracle --save - https://github.com/strongloop/strong-oracle
+test met oracle driver en knex nog niet uitgeprobeerd.    
+npm install knex --save - http://knexjs.org/     
+npm install oracledb --save - https://github.com/oracle/node-oracledb      
+npm install strong-oracle --save - https://github.com/strongloop/strong-oracle      
