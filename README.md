@@ -3,9 +3,9 @@ GeoDropIn onderzoek naar diverse concepten met meteor (unzip, ogr2ogr, oracle)
 
 ## Algemeen
 In de code wordt geprobeerd ogr2ogr aan te spreken en verbinding te maken met Oracle via meteor collections.    
-Verschillende meteor packages dienen te zijn  geinstalleerd (zie main.html voor url's).   
+Verschillende meteor packages dienen te zijn geinstalleerd (zie onderaan).  
 
-Installeer lokaal:   
+Installeer lokaal (Windows):   
 - ogr2ogr (via Gdal installatie, zorg hier dat de Oracle OCI driver meekomt)
 - oracle instant client 32 bits (http://www.oracle.com/technetwork/topics/winsoft-085727.html)
 - sqlplus en plsql-developer tbv oracle 
@@ -106,7 +106,8 @@ Kies uit lijst databases "ORACLE-XEC"
 
 ## Packages te installeren om dit project te draaien
 ### Packages
-Installeer de volgende packages    
+ 
+Installeer de volgende packages (zie main.html voor url's).       
 ``meteor npm install --save babel-runtime``    
 ``meteor npm install --save ogr2ogr``    
 ``meteor npm install --save unzip``     
