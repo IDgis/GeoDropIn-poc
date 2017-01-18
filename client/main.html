@@ -4,22 +4,22 @@
 
 <body>
   <h1>Welcome to GeoDropIn!</h1>
-
+  <hr>
   <h2>Try-out execute OS command</h2>
   {{> cmd}}
-  
+  <hr>
   <h2>Try-out extract zip file</h2>
   <h3>https://github.com/EvanOxfeld/node-unzip</h3>
   {{> ziptest}}
-  
-  <h2>Try-out translate gis file to Postgres table using ogr2ogr</h2>
+  <hr>
+  <h2>Try-out translate gis file to database table using ogr2ogr</h2>
   <h3>https://github.com/wavded/ogr2ogr </h3>
-  {{> ogrpgtest}}
-  
+  {{> ogrdbtest}}
+  <hr>
   <h2>Try-out update metadata tabel in Oracle using collections</h2>
   <h3>https://atmospherejs.com/metstrike/meteor-oracle </h3>
-  {{> oracletest}}
-  
+  <p>TBD meteor-oracle alleen linux, zie http://knexjs.org/ voor alternatieven</p>
+  <hr>
 </body>
 
 <template name="cmd">
@@ -35,18 +35,25 @@
   Zipfile : <input id="zipPath" name="zipPath" >
   Extract to: <input id="outputPath" name="outputPath" >
   <button>Unzip</button>
+  <p>Examples:</p>
+  <p><em>zipFile</em> C:\Users\Rob\Downloads\cds-go-live.zip, <em>destination</em> C:\tmp\</p>
 </template>
 
-<template name="ogrpgtest">
+<template name="ogrdbtest">
   GIS file : <input id="gisPath" name="gisPath">
-  Postgres connectie: <input id="pgconnPath" name="pgconnPath">
-  <button>Translate Gis file to Postgres tabel</button>
+  DB driver : <input id="dbDriver" name="dbDriver">  
+  DB connectie: <input id="dbConn" name="dbConn">
+  <button>Translate Gis file to DB tabel</button>
+  <p>Examples:</p>
+  <p><em>driver</em> PostgreSQL, <em>connection</em> PG:dbname=gdaltest host=192.168.99.100 port=6544 user=postgres password=postgres</p>
+  <p><em>driver</em> OCI, <em>connection</em> OCI:system/oracle@oracle-xec:dummy (oracle-xec is in INSTANTCLIENT/network/admin/tnsnames.ora)</p>
 </template>
 
 <template name="oracletest">
-  PHYSICALNAME : <input id="physicalName" name="physicalName">
-  Oracle connectie: <input id="oraconnPath" name="oraconnPath">
+  TITEL : <input id="title" name="title"><p></p>
+  Oracle connectie: <input id="oraconnPath" name="oraconnPath"><p></p>
   <button>Insert to metadata tabel in oracle</button>
+  <p>Inserts data into table SDE.GDB_ITEMS_VW</p>
 </template>
 
 

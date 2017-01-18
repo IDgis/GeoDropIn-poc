@@ -1,5 +1,4 @@
 import { Meteor } from 'meteor/meteor';
-
 'use strict';
 
 
@@ -7,6 +6,8 @@ var Future;
 var exec;
 var fs;
 var unzip;
+var ogr2ogr;
+var metadataColl;
 
 Meteor.startup(function () {
   // Load future from fibers
@@ -21,6 +22,20 @@ Meteor.startup(function () {
   
   fs = Npm.require('fs');
   console.log('fs: ' + fs);
+
+  ogr2ogr = Npm.require('ogr2ogr')
+  console.log('ogr2ogr: ' + ogr2ogr);
+
+//  Oracle.setDefaultOracleOptions(
+//      {connection: {
+//          user: "meteor", 
+//          password: "meteor", 
+//          connectString: "192.168.99.100:49161/xe"
+//          }
+//      });
+  
+  metadataColl = new Mongo.Collection("SDE.GDB_ITEMS_VW");
+
 });
 
 // Server methods
@@ -45,8 +60,8 @@ Meteor.methods({
   }, 
   
   extractZip: function (zipPath, outputPath){
-    console.log('fs: ' + fs);
-    console.log('unzip: ' + unzip);
+    console.log('zipPath: ' + zipPath);
+    console.log('outputPath: ' + outputPath);
     try {
       fs.createReadStream(zipPath).pipe(unzip.Extract({ path: outputPath }));
       return 'OK';
@@ -54,6 +69,44 @@ Meteor.methods({
       console.log('error: ', e);
       return e;
     }
-  }
+  },
+  
+  ogr2db: function (gisPath, dbDriver, dbConn){
+    console.log('gisPath: ' + gisPath);
+    console.log('dbDriver: ' + dbDriver);
+    console.log('dbConn: ' + dbConn);
+    try {
+      let result = ogr2ogr(gisPath)
+      .format(dbDriver)
+      .skipfailures()
+      .destination(dbConn)
+      .exec(function(er, buf) {
+        if (er){
+          console.log('error: ', er);
+        }
+      });
+      return result;
+    } catch (e){
+        console.log('error: ', e);
+      return e;
+    }
+  },
+  
+  updateOracleCollection: function (theTitle, theUuid, thePhysicalName, theDocumentation){
+    console.log('title: ' + theTitle);
+    console.log('uuid: ' + theUuid);
+    let dataType = '{CD06BC3B-789D-4C51-AAFA-A467912B8965}';
+    console.log('dataType: ' + dataType);
+    console.log('physicalName: ' + thePhysicalName);
+    console.log('documentation: ' + theDocumentation);
+
+
+    metadataColl.insert({uuid: theUuid, type: dataType, physicalname: thePhysicalName, documentation: theDocumentation, title: theTitle});
+
+    let rows = metadataColl.find({type: '{CD06BC3B-789D-4C51-AAFA-A467912B8965}'}).fetch();
+
+    console.log('rows: ', rows);
+  },
+
 });
  
